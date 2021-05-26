@@ -6,7 +6,8 @@ import './App.css';
 
 function App() {
 
-  const {register, handleSubmit, formState: { errors }} = useForm();
+  const {register, handleSubmit, formState: { errors }} = useForm({
+    mode: 'onChange'});
 
   const[aardbeien, setAardbeien] = useState(0);
   const[bananen, setBananen] = useState(0);
@@ -110,10 +111,14 @@ function App() {
                     required: {
                       value: true,
                       message: 'Dit veld mag niet leeg zijn',
-                    }
+                    },
+                    min: {
+                      value: 18,
+                      message: 'Je moet minimaal 18 jaar oud zijn',
+                    },
                   })}
               />
-              {errors.Leeftijdnaam && <p>{errors.Leeftijdnaam.message}</p>}
+              {errors.Leeftijd && <p>{errors.Leeftijd.message}</p>}
               <label htmlFor="postcode">Postcode</label>
               <input
                   type="text"
